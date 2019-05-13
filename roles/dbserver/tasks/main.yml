@@ -1,0 +1,19 @@
+- name: Install DB Server 
+  package:
+    name: mariadb-server 
+    state: installed 
+
+- name: Start MariaDB Service 
+  service:
+    name: mariadb
+    state: restarted 
+    enabled: yes
+
+- name: Download Schema 
+  get_url:
+    name: https://s3-us-west-2.amazonaws.com/studentapi-cit/studentapp-ui-proj1.sql
+    dest: /tmp/student.sql 
+    remote_src: true
+
+- name: Load Schema 
+  shell: mysql </tmp/student.sql 

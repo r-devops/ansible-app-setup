@@ -11,7 +11,7 @@
 
 - name: Download Schema 
   get_url:
-    name: https://s3-us-west-2.amazonaws.com/studentapi-cit/studentapp-ui-proj1.sql
+    url: https://s3-us-west-2.amazonaws.com/studentapi-cit/studentapp-ui-proj1.sql
     dest: /tmp/student.sql 
     remote_src: true
 

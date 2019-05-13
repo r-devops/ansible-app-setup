@@ -1,0 +1,6 @@
+- name: Setup app stack 
+  hosts: localhost 
+  become: yes
+  roles:
+    - webserver
+    - appserver

@@ -59,3 +59,40 @@
     name: tomcat 
     state: started 
     enabled: yes 
+
+- name: Stop API Service 
+  service:
+    name: studentapi 
+    state: stopped 
+  ignore_errors: yes 
+
+- name: Remove API directory 
+  file:
+    path: "{{APPUSERHOME}}"
+    state: absent 
+
+- name: Create api directory 
+  file:
+    path: "{{APPUSERHOME}}/api"
+    state: directory 
+  become_user: "{{APPUSER}}"
+
+- name: Download API war 
+  get_url:
+    url: https://s3-us-west-2.amazonaws.com/studentapi-cit/studentapi.war
+    dest: "{{APPUSERHOME}}/api/studentapi.war"
+  become_user: "{{APPUSER}}"
+
+- name: Download API Service 
+  get_url:
+    url: https://s3-us-west-2.amazonaws.com/studentapi-cit/studentapi-init
+    dest: /etc/init.d/studentapi 
+    mode: 0755
+
+- name: Reload Daemon 
+  shell: systemctl daemon-reload
+
+- name: Start API Service 
+  service:
+    name: studentapi 
+    state: started 

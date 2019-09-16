@@ -57,7 +57,7 @@
 - name: Start tomcat service 
   service:
     name: tomcat 
-    state: started 
+    state: restarted 
     enabled: yes 
 
 - name: Stop API Service 

@@ -68,7 +68,7 @@
 
 - name: Remove API directory 
   file:
-    path: "{{APPUSERHOME}}"
+    path: "{{APPUSERHOME}}/api"
     state: absent 
 
 - name: Create api directory 
